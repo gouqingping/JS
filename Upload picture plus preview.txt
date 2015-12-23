@@ -1,7 +1,7 @@
 /* html部分*/
 
 <div class="btn-upload">
-	<span>添加附件</span>
+	<span>上传图片</span>
 	<form><input type="file"></form>
 </div>
 <div class="mainImg" id="mainImg"></div>
