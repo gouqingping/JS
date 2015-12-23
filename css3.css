@@ -158,3 +158,12 @@ a:hover {
 	}
 }
 
+
+/* CSS3 伪类鼠标移入360°旋转 */
+.class:hover{
+	transform:rotate(360deg);
+	-ms-transform:rotate(360deg); /* Internet Explorer */
+	-moz-transform:rotate(360deg); /* Firefox */
+	-webkit-transform:rotate(360deg); /* Safari 和 Chrome */
+	-o-transform:rotate(360deg); /* Opera */
+}
