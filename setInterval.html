@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Countdown</title>
+<script type="text/javascript" src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
+<style>
+    body{padding:10% 8px;}
+    .contenter {width:100%;line-height:500px;color:#333; text-align: center;}
+    #showTime{color:red;font-weight: bold;font-size: 2rem; margin:0 15px;}
+    button{width: 100px; height: 25px; border-radius: 4px;}
+</style>
+</head>
+
+<body>
+    <div class="contenter">
+            <input type="button" value="免费获取验证码" onclick="newTime(this)"/>
+            <button><span>点击开始</span></button>
+    </div>
+</body>
+</html>
+/*  javascript data NO.2  */
+<script type="text/javascript">
+    $('button').click(function(){
+    var i=60;
+    var iID=setInterval(setbgColor, 500);
+    $('button').html('<span></span>').attr('disabled','disabled').css('background','#f9f9f9');
+    function setbgColor(){
+        if (i<10) {
+            i='0'+i
+        }
+        else
+        {
+            i=i
+        }
+        $('span').html('重新发送('+i+')');
+        if((i--) < 1){
+            clearInterval(iID);
+            $('button').removeAttr('disabled').css('background','').html('重新发送');
+        }
+    }
+});
+</script>
+
+/*  javascript data NO.1  */
+<script type="text/javascript">
+    var countdown = 60*60*24;
+    function newTime(obj) {
+        if (countdown == 0) { 
+            obj.removeAttribute("disabled");    
+            obj.value="免费获取验证码"; 
+            countdown = 60*60*24;
+        }
+        else
+        { 
+            obj.setAttribute("disabled", true); 
+            obj.value="重新发送(" + countdown + ")"; 
+            countdown--; 
+        } 
+        setTimeout(function() { 
+            newTime(obj);
+        },1000);
+    }
+  </script>
