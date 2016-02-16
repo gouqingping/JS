@@ -17,6 +17,22 @@
 		color: #666;
 	}
 
+	.min {
+		width: 300px;
+		margin:10% auto;
+		padding:20px;
+		text-align: center;
+		border-radius: 8px;
+		background-color: white;
+		box-shadow: 0 0 20px rgba(0,0,0,0.3);
+	}
+
+	.checkBOx {
+		width: auto;
+		margin:10px auto;
+
+	}
+
 	[type="Submit"]{
 		 -moz-user-select: none;
 	    background-image: none;
@@ -33,21 +49,25 @@
 	    vertical-align: middle;
 	    white-space: nowrap;
 	}
+
 	[type="Submit"] {
 	    background-image: linear-gradient(to bottom, #563d7f 0px, #6f549f 100%);
 	    border-color: #563d7c;
 	    color: #fff;
 	}
+
 	[type="Submit"]:focus, [type="Submit"].focus {
 	    background-color: #e6e6e6;
 	    border-color: #adadad;
 	    color: #000;
 	}
+
 	[type="Submit"]:hover {
 	    background-image: linear-gradient(to bottom, #563d7c 0px, #6f5499 100%);
 	    border-color: #563d7c;
 	    color: #fff;
 	}
+
 	[disabled]{
 		opacity: 0.3;
 	}
@@ -78,9 +98,16 @@
 	}
 </script>
 <body>
-	<form name="checkBOxForm" onSubmit="return ALLcheckBOxFrom(this)">
-		<input name="checkBOx" type="checkbox" onClick="ALLcheckBOx(this)"><span>选中后提交</span><br>
-		<input type="Submit" value="提交" disabled>
-	</form>
+	<div class="min">
+		<form name="checkBOxForm" onSubmit="return ALLcheckBOxFrom(this)">
+			<div class="checkBOx">
+				<input name="checkBOx" type="checkbox" onClick="ALLcheckBOx(this)">
+				<span>选中后提交</span>
+			</div>
+			<div class="checkBOx">
+				<input type="Submit" value="提交" disabled>
+			</div>
+		</form>
+	</div>
 </body>
 </html>
