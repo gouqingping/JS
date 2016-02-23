@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>checkbox</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
+<style>
+    body{padding:10% 8px;}
+    .contenter {width:100%;color:#333; text-align: center;}
+    input,label {cursor: pointer;}
+    .checkBOxBox{margin:10px;}
+</style>
+
+<script type="text/javascript">
+
+	$("document").ready(function(){
+	    $(".checkBOxClick").click(function(){
+
+		    var checkBOxFist = $("#checkBOxFist:checkbox");
+				checkBOxLast = $("#checkBOxLast:checkbox");
+				checkBOxFistButton = checkBOxFist.attr("checked");
+				checkBOxLastButton = checkBOxLast.attr("checked");
+				checkBOxClick = $(".checkBOxClick");
+
+			    checkBOxFist.each(function(){
+			   		if(checkBOxFistButton){
+						alert("checkBOxFist: False");
+					}
+					else
+					{
+						alert("checkBOxFist: True");
+					}
+
+					if(checkBOxLastButton){
+						alert("checkBOxLast: False");
+					}
+					else
+					{
+						alert("checkBOxLast: True");
+					}
+			    });
+		});
+	});
+
+
+</script>
+</head>
+
+<body>
+    <div class="contenter">
+    	<div class="checkBOxClickBox">
+    		<button class="checkBOxClick">BUTTON</button>
+    	</div>
+    	<div class="checkBOxBox">
+	    	<input type="checkbox" id="checkBOxFist" checked="false" />
+	    	<label for="checkBOxFist">checkBOxFist</label>
+    	</div>
+    	<div class="checkBOxBox">
+	    	<input type="checkbox" id="checkBOxLast" />
+	    	<label for="checkBOxLast">checkBOxLast</label>
+    	</div>
+    </div>
+</body>
+</html>
