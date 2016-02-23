@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>checkbox</title>
+<title>判断复选框是否选中</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
 <style>
     body{padding:10% 8px;}
@@ -14,16 +14,17 @@
 <script type="text/javascript">
 
 	$("document").ready(function(){
+
 	    $(".checkBOxClick").click(function(){
 
 		    var checkBOxFist = $("#checkBOxFist:checkbox");
 				checkBOxLast = $("#checkBOxLast:checkbox");
-				checkBOxFistButton = checkBOxFist.attr("checked");
-				checkBOxLastButton = checkBOxLast.attr("checked");
+				checkBOxFistlabel = checkBOxFist.attr("checked");
+				checkBOxLastlabel = checkBOxLast.attr("checked");
 				checkBOxClick = $(".checkBOxClick");
 
 			    checkBOxFist.each(function(){
-			   		if(checkBOxFistButton){
+			   		if(checkBOxFistlabel){
 						alert("checkBOxFist: False");
 					}
 					else
@@ -31,7 +32,7 @@
 						alert("checkBOxFist: True");
 					}
 
-					if(checkBOxLastButton){
+					if(checkBOxLastlabel){
 						alert("checkBOxLast: False");
 					}
 					else
@@ -39,9 +40,10 @@
 						alert("checkBOxLast: True");
 					}
 			    });
+			    
 		});
-	});
 
+	});
 
 </script>
 </head>
