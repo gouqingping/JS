@@ -1,0 +1,56 @@
+<script type="text/javascript">
+	function mousedown(){
+		var mous = document.getElementById("dialog-nav"); // mousedown ID
+		drag("dialog-nav","dialogbox");
+	}
+
+	function drag(mous,mobile){	
+		var mous   = document.getElementById(mous);
+		var mobile = document.getElementById("dialogbox"); // mobile ID
+		var docu   = document;
+		var e,offsetT,offsetL,downX,downY,moveX,moveY;  
+		mous.onmouseover = function(e){
+			this.style.cursor = "move";
+
+		}
+		mous.onmousedown = function(e){
+			e = e||window.event;
+			offsetT = mobile.offsetTop;
+			offsetL = mobile.offsetLeft;
+			downX = e.clientX;
+			downY = e.clientY;
+			mous.onmouseup = function(e){
+				docu.onmousemove = function(){return false;}
+			}
+			docu.onmousemove = function(e){
+				e = e||window.event;
+				moveX = e.clientX;
+				moveY = e.clientY;
+				mobile.style.top = offsetT + (moveY - downY) + "px";
+				mobile.style.left = offsetL + (moveX - downX) + "px";
+			}
+		}
+	}
+	window.onload = function(){
+		mousedown();
+	}
+</script>
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<!--  聊天窗口  -->
+<div class="showDialog log1" style="height: 100px;"><span class="iconfont">&#xe602;</span>聊天窗口</div>
+<div class="dialog-box" id="dialogbox">
+	<div class="dialog-user">
+		<div class="dialog-nav">
+			<input type="text" name="search-user" value="查找联系人" />
+			<span id="finduser" class="iconfont">&#xe60f;</span>
+		</div>
+		<div id="user">
+			<ul></ul>
+		</div>
+	</div>
+	<div class="dialog-cent" onkeydown="keyCtrlEnter()">
+		<div class="dialog-nav" id="dialog-nav"><p id="toName"></p><span class="iconfont close">&#xe61d;</span></div>
+	</div>
+	<div class="clr"></div>
+</div>
