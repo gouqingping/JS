@@ -1,39 +1,37 @@
 <script type="text/javascript">
-	function mousedown(){
-		var mous = document.getElementById("dialog-nav"); // mousedown ID
-		drag("dialog-nav","dialogbox");
-	}
+function mousedown(){
+	var m = document.getElementById("dialog-nav"); // mousedown ID
+	drag("dialog-nav","dialogbox");
+}
 
-	function drag(mous,mobile){	
-		var mous   = document.getElementById(mous);
-		var mobile = document.getElementById("dialogbox"); // mobile ID
-		var docu   = document;
-		var e,offsetT,offsetL,downX,downY,moveX,moveY;  
-		mous.onmouseover = function(e){
-			this.style.cursor = "move";
-
+function drag(m,g){	
+	var m   = document.getElementById(m);
+	var g = document.getElementById("dialogbox"); // mobile ID
+	var d    = document;
+	var e,mT,mL,dX,dY,mX,mY;
+	m.onmousedown = function(e){
+		e = e||window.event;
+		mT = g.offsetTop;
+		mL = g.offsetLeft;
+		dX = e.clientX;
+		dY = e.clientY;
+		m.onmouseup = function(e){
+			d.onmousemove = function(e){
+				return false;
+			}
 		}
-		mous.onmousedown = function(e){
+		d.onmousemove = function(e){
 			e = e||window.event;
-			offsetT = mobile.offsetTop;
-			offsetL = mobile.offsetLeft;
-			downX = e.clientX;
-			downY = e.clientY;
-			mous.onmouseup = function(e){
-				docu.onmousemove = function(){return false;}
-			}
-			docu.onmousemove = function(e){
-				e = e||window.event;
-				moveX = e.clientX;
-				moveY = e.clientY;
-				mobile.style.top = offsetT + (moveY - downY) + "px";
-				mobile.style.left = offsetL + (moveX - downX) + "px";
-			}
+			mX = e.clientX;
+			mY = e.clientY;
+			g.style.top = mT + (mY - dY) + "px";
+			g.style.left = mL + (mX - dX) + "px";
 		}
 	}
-	window.onload = function(){
-		mousedown();
-	}
+}
+window.onload = function(){
+	mousedown();
+}
 </script>
 <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
 
