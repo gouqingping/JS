@@ -1,0 +1,149 @@
+<!doctype html>
+<html>
+<head>
+<title>checkboxStyle</title>
+<meta name="viewport" content="width=device-width"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<script type="text/javascript">
+(function( e ){
+	e.fn.labelauty = function( options ) {
+		var settings = e.extend({
+			development: false,
+			class: "labelauty",
+			label: true,
+			separator: "|",
+			checked_label: "Checked",
+			unchecked_label: "Unchecked",
+			minimum_width: false,
+			same_width: true
+		}, options);
+		return this.each(function() {
+			var obj = jQuery( this );
+			var use = true;
+			var l;
+			var labels;
+			var id;
+			if ( obj.is( ":checkbox" ) === false && obj.is( ":radio" ) === false ) {
+				return this;
+			}
+			obj.addClass( settings.class );
+			l = obj.attr( "data-labelauty" );
+			use = settings.label;
+			if ( use === true ) {
+				if ( l == null || l.length === 0 ) {
+					labels = new Array();
+					labels[0] = settings.unchecked_label;
+					labels[1] = settings.checked_label;
+				} else {
+					labels = l.split( settings.separator );
+					if ( labels.length > 2 ) {
+						use = false;
+						debug( settings.development, "" );
+					} else {
+						if ( labels.length === 1 ) {
+							debug( settings.development, "" );
+						}
+					}
+				}
+			}
+			obj.css({ display : "none" });
+			obj.removeAttr( "data-labelauty" );
+			id = obj.attr( "id" );
+			if ( id == null ) {
+				var checkedId = 1 + Math.floor( Math.random() * 1024000 );
+				id = "labelauty-" + checkedId;
+				while ( jQuery( id ).length !== 0 ) {
+					checkedId++;
+					id = "labelauty-" + checkedId;
+					debug( settings.development, "" );
+				}
+				obj.attr( "id", id );
+			}
+			obj.after( create( id, labels, use ) );
+			if ( settings.minimum_width !== false ) {
+				obj.next( "label[for=" + id + "]" ).css({ "min-width": settings.minimum_width });
+			}
+			if ( settings.same_width != false && settings.label == true ) {
+				var labelObj = obj.next( "label[for=" + id + "]" );
+				var checkedWidth   = getRealWidth(labelObj.find( "span.labelauty-unchecked" ));
+				var upCheckedWidth = getRealWidth(labelObj.find( "span.labelauty-checked" ));
+				if ( checkedWidth > upCheckedWidth ) {
+					labelObj.find( "span.labelauty-checked" ).width( checkedWidth );
+				} else {
+					labelObj.find( "span.labelauty-unchecked" ).width( upCheckedWidth );
+				}
+			}
+		});
+	};
+	function getRealWidth( element ) {
+		var width = 0;
+		var ele = element;
+		var style = 'position: absolute !important; top: -1000 !important; ';
+		appEle = ele.clone().attr('style', style).appendTo('body');
+		width = ele.width(true);
+		appEle.remove();
+		return width;
+	}
+	function debug( debug, message ) {
+		if( debug && window.console && window.console.log )
+			window.console.log( "jQuery-LABELAUTY: " + message );
+	};
+	function create( id, label ) {
+		if ( label == true ) {
+			show = '<label for="' + id + '">' +
+						'<span class="fa fa-check-circle"></span>' +
+						// checkbox checked
+						'<span class="fa fa-circle-o"></span>' +
+						// checkbox not checked
+					'</label>';
+		} else {
+			show = '<label for="' + id + '">' +
+						'<span class="fa fa-check-circle"></span>' +
+						// checkbox checked
+						'<span class="fa fa-circle-o"></span>' +
+						// checkbox not checked
+					'</label>';
+		}
+		return show;
+	};
+}( jQuery ));
+</script>
+<style>
+/*checkbox checked style*/
+input.labelauty:not(:checked):not([disabled]) + label:hover .fa-check-circle {
+    display: block;
+}
+
+input.labelauty:not(:checked) + label > span.fa-check-circle {
+    display: none;
+}
+/*checkbox not checked style*/
+input.labelauty:checked + label .fa-circle-o {
+    display: block;
+}
+
+input.labelauty:checked + label > span.fa-circle-o {
+    display: none;
+}
+/*checkbox style*/
+input.labelauty:checked + label > span.fa-check-circle {
+    display: inline-block;
+}
+
+input.labelauty.no-label:checked + label > span.fa-check-circle {
+    display: block;
+}
+
+input.labelauty[disabled] + label {
+    opacity: 0.5;
+}
+
+label {
+	margin-right: 5px;
+}
+</style>
+</head>
+<body>
+<input type="checkbox" name="cck" id="cck" checked><label for="cck">Checked Checkboc </label><br/>
+<input type="checkbox" name="not" id="not"><label for="not">Not Checked Checkboc </label><br/>
+</body>
