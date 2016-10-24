@@ -1,0 +1,114 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+table{
+	width:400px;
+	height:400px;
+	border-collapse:collapse;
+}
+tr{
+	width:80px;
+	height:60px;
+}
+img{
+	position:absolute;
+	width:150px;
+	height:100px;
+}
+</style>
+</head>
+<body>
+	<button onClick="checkAll('userName')">全选</button>
+	<button onClick="allNotCheck('userName')">全不选</button>
+	<button onClick="disCheck('userName')">反选</button>
+	<table border="1">
+		<tbody id="tb">
+			<tr>
+				<td>刘备<input type="checkbox" name="userName" value="lb"></td>
+				<td>蜀国</td>
+				<td>Big Boss</td>
+			</tr>
+			<tr>
+				<td>曹操<input type="checkbox" name="userName" value="cc"></td>
+				<td>魏国</td>
+				<td>Big Boss</td>
+			</tr>
+			<tr>
+				<td>孙权<input type="checkbox" name="userName" value="sq"></td>
+				<td>吴国</td>
+				<td>Big Boss</td>
+			</tr>
+			<tr>
+				<td>关羽<input type="checkbox" name="userName" value="gy"></td>
+				<td>蜀国</td>
+				<td>Boss</td>
+			</tr>
+		</tbody>	
+	</table>
+    <button onClick="add('tb','userName')">添加</button>	
+	<button onClick="removeList('userName')">删除</button>
+    <button onClick="insert('userName')">插入</button>
+</body>
+</html>
+<script type="text/javascript">
+function removeList(rmvcc) {
+	var rmvcc = document.getElementsByName(rmvcc);
+	for ( var i = 0; i < rmvcc.length; i ++ ) {
+		if( rmvcc[i].checked ){
+			var tr = rmvcc[i].parentNode.parentNode;
+			var table = tr.parentNode;
+			table.removeChild(tr);
+			i--;
+		}
+	}
+}
+function insert(insert) {
+	var insert = document.getElementsByName(insert);
+	var str ="";
+	var td = document.createElement("td");
+	for ( m in insert ) {
+		if ( insert[m].checked ) {
+			var tr = insert[m].parentNode.parentNode;
+			str += insert[m].value + ",";
+			var strSplit = str.split(",");
+			td.innerHTML="<img src='" + strSplit[m] + ".gif'>";
+			tr.insertBefore(td,tr.lastChild);
+		}
+	}
+}
+function disCheck(discc) {
+	var discc = document.getElementsByName(discc);
+	for ( var i = 0; i < discc.length; i++ ) {
+		if ( discc[i].checked ) {
+			discc[i].checked=false;
+		} else {
+			discc[i].checked=true;
+		}
+	}
+}
+function checkAll(ccall){
+	var ccall = document.getElementsByName(ccall);
+	for ( var i = 0; i < ccall.length; i++ ) {
+		ccall[i].checked=true;
+	}
+}
+function allNotCheck(notcc){
+	var notcc = document.getElementsByName(notcc);
+	for ( var i = 0; i < notcc.length; i++ ) {
+		notcc[i].checked=false;
+	}
+}
+
+function add(table,user){
+	var json = {  contry:{ area:{ name:"赵云", id:"zy",  nation:"蜀国" , jobs:"boss"} } };
+	var evl = eval(json);
+	var obj = evl.contry.area;
+	var table = document.getElementById(table);
+	var user = document.getElementsByName(user);
+	var tr = document.createElement("tr");
+	var td ="<td>" + obj.name + "<input type='checkbox' name='userName' value=" + obj.id + "></td><td>" + obj.nation + "</td><td>" + obj.jobs + "</td>";
+	tr.innerHTML=td;
+	table.insertBefore(tr,user.lastChild);
+};
+</script>
